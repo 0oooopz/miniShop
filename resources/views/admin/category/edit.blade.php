@@ -1,6 +1,6 @@
 @extends('layouts.admin_layout')
 
-@section('title','Add category')
+@section('title','Edit category')
 
 @section('content')
   <!-- Content Header (Page header) -->
@@ -8,7 +8,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Add category</h1>
+          <h1 class="m-0">Edit category</h1>
         </div><!-- /.col -->
       </div><!-- /.row -->
       @if (session('success'))
@@ -27,19 +27,20 @@
       <div class="row">
         <div class="card card-primary">
           <!-- form start -->
-          <form action="{{ route('category.store') }}" method="POST">
+          <form action="{{ route('category.update', $category->id) }}" method="POST">
             @csrf
+            @method('PUT')
             <div class="card-body">
               <div class="form-group">
                 <label for="exampleInputEmail1">Title</label>
-                <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="Enter title Category">
+                <input type="text" value="{{ $category->title }}" name="title" class="form-control" id="exampleInputEmail1" placeholder="Enter title Category">
               </div>
-                <label for="exampleInputEmail1">Description</label>
-                <input type="text" name="description" class="form-control" id="exampleInputEmail1" placeholder="Enter description">
-              </div>
+              <label for="exampleInputEmail1">Description</label>
+              <input type="text" value="{{ $category->description }}" class="form-control" id="exampleInputEmail1" placeholder="Enter description">
+            </div>
             <!-- /.card-body -->
             <div class="card-footer">
-              <button type="submit" class="btn btn-primary">Add</button>
+              <button type="submit" class="btn btn-primary">Update</button>
             </div>
           </form>
         </div>
@@ -48,3 +49,4 @@
   </section>
   <!-- /.content -->
 @endsection
+
