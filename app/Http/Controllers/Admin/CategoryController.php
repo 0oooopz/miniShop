@@ -65,19 +65,16 @@ class CategoryController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
+	/**
+	 * @param Request $request
+	 * @param Category $category
+	 * @return mixed
+	 */
     public function update(Request $request, Category $category)
     {
-        $new_category = new Category;
-        $new_category->title = $request->title;
-        $new_category->description = $request->description;
-        $new_category->save();
+        $category->title = $request->title;
+        $category->description = $request->description;
+        $category->save();
         return redirect()->back()->withSuccess('Category was Updated successfully!');
     }
 
@@ -89,6 +86,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->back()->withSuccess('Category Deleted successfully!');
     }
 }

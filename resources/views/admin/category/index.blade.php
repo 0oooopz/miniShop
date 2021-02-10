@@ -11,6 +11,12 @@
           <h1 class="m-0">All Categories</h1>
         </div><!-- /.col -->
       </div><!-- /.row -->
+      @if (session('success'))
+        <div class="col-md-12 alert alert-success" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          <h4><i class="icon fa fa-check"></i>{{ session('success') }}</h4>
+        </div>
+      @endif
     </div><!-- /.container-fluid -->
   </div>
   <!-- /.content-header -->
@@ -65,11 +71,15 @@
                       </i>
                       Edit
                     </a>
-                    <a class="btn btn-danger btn-sm" href="#">
-                      <i class="fas fa-trash">
-                      </i>
-                      Delete
-                    </a>
+                    <form class="d-inline" action="{{ route('category.destroy',$category->id) }}" method="POST">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" class="btn btn-danger btn-sm delete-btn">
+                        <i class="fas fa-trash">
+                        </i>
+                        Delete
+                      </button>
+                    </form>
                   </td>
                 @endforeach
                 </tbody>
